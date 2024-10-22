@@ -1,35 +1,53 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from 'react';
+import TimeTable from './components/TimeTable';
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
+  const [hourCount, setHourCount] = useState(8);
+  const [dayCount, setDayCount] = useState(5);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(e.target.hourCount.value);
+    console.log(e.target.dayCount.value);
+    setHourCount(parseInt(e.target.hourCount.value));
+    setDayCount(parseInt(e.target.dayCount.value));
+  };
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+      <div className='container mx-auto'>
+        <h1 className='text-5xl text-center my-2'>Automatic Timetable</h1>
 
-export default App
+        <form onSubmit={handleSubmit}>
+          <div className="flex align-middle justify-center gap-3 m-4">
+            <input
+              type="number"
+              name="hourCount"
+              min={4}
+              max={10}
+              defaultValue={8}
+              id="hourCount"
+              className="bg-gray-50 border border-gray-600 number-gray-900 text-sm rounded-lg p-2"
+              placeholder="Hours"
+            />
+            <input
+              type="number"
+              name='dayCount'
+              min={3}
+              max={6}
+              defaultValue={5}
+              id="dayCount"
+              className="bg-gray-50 border border-gray-600 text-gray-900 text-sm rounded-lg p-2"
+              placeholder="Days"
+            />
+            <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm text-center p-2">Submit</button>
+          </div>
+        </form>
+
+        <TimeTable hourCount={hourCount} dayCount={dayCount} />
+      </div>
+    </>
+  );
+};
+
+export default App;
