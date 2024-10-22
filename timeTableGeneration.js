@@ -58,13 +58,8 @@ function GenerateTimeTable(arr, i, y, allLength, clsSec, cls, day) {
             AllSubjectFriday = [...AllSubjectFriday, newTimeTable];
             cls.timeTable = newTimeTable;
         }
-
-
-
-
-
     }
-    let overAll = true;
+   
     for (let k = i; k < 8; k++) {
         for (let j = 0; j < clsSec.length; j++) {
             let isAvailable = checkCondition(k, clsSec[j]["name"], arr, y, clsSec[j]["teacher"], clsSec, day);
